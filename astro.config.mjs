@@ -9,8 +9,6 @@ import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import pagefind from "astro-pagefind";
 import { pluginCodeOutput } from "@fujocoded/expressive-code-output";
 import react from "@astrojs/react";
-import markdoc from "@astrojs/markdoc";
-import keystatic from "@keystatic/astro";
 import { vitePluginSvelteH2J } from "@ethercorps/svelte-h2j/vite"; // Re-importa o plugin
 
 const isDev = process.env.NODE_ENV === "development";
@@ -35,9 +33,7 @@ export default defineConfig({
       },
     }),
     react(),
-    markdoc(),
     pagefind(),
-    ...(isDev ? [keystatic()] : []), // uses the integration conditionally
   ],
   vite: {
     plugins: [
