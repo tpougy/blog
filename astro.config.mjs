@@ -9,8 +9,12 @@ import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import pagefind from "astro-pagefind";
 import { pluginCodeOutput } from "@fujocoded/expressive-code-output";
 import react from "@astrojs/react";
+import rehypeThemeImages from "./src/plugins/rehype-theme-images.ts";
 export default defineConfig({
-  site: "https://tpougy.blog",
+  site: process.env.SITE_URL ?? "https://blog.tpou.gy",
+  markdown: {
+    rehypePlugins: [rehypeThemeImages],
+  },
   integrations: [
     astroExpressiveCode({
       plugins: [pluginLineNumbers(), pluginCodeOutput()],
