@@ -5,14 +5,14 @@ import FormattedDate from "@components/FormattedDate.astro";
 import { getLangFromFilePath, getLangFromUrl } from "@i18n/utils";
 import PageLayout from "@layouts/PageLayout.astro";
 import { readingTime } from "@lib/utils";
-import { type CollectionEntry, getCollection } from "astro:content";
+import { type CollectionEntry, getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
   const currentFilePath = import.meta.url;
 
   const fileLang = getLangFromFilePath(currentFilePath);
 
-  const pages = await getCollection("blog");
+  const pages = await getCollection("posts");
 
   const paths = pages
     .filter((page: { id: string }) => page.id.startsWith(`${fileLang}/`))
@@ -35,9 +35,9 @@ const lang = getLangFromUrl(url); // Detecta o idioma da URL
 const page = Astro.props;
 
 const post = Astro.props;
-type Props = CollectionEntry<"blog">;
+type Props = CollectionEntry<"posts">;
 
-const { Content } = await page.render();
+const { Content } = await render(page);
 ---
 
 <PageLayout

@@ -9,8 +9,6 @@ import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import pagefind from "astro-pagefind";
 import { pluginCodeOutput } from "@fujocoded/expressive-code-output";
 import react from "@astrojs/react";
-import { vitePluginSvelteH2J } from "@ethercorps/svelte-h2j/vite"; // Re-importa o plugin
-
 export default defineConfig({
   site: "https://tpougy.blog",
   integrations: [
@@ -34,9 +32,7 @@ export default defineConfig({
     pagefind(),
   ],
   vite: {
-    plugins: [
-      vitePluginSvelteH2J(), // Re-adiciona o plugin svelte-h2j
-    ],
+    plugins: [],
     build: {
       rollupOptions: {
         external: ["/pagefind/pagefind.js?url"],

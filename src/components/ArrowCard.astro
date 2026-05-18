@@ -3,14 +3,15 @@ import { getLangFromSlug, getPureSlug } from "@i18n/utils";
 import type { CollectionEntry } from "astro:content";
 
 type Props = {
-  entry: CollectionEntry<"blog"> | CollectionEntry<"projects">;
+  entry: CollectionEntry<"posts"> | CollectionEntry<"projects">;
 };
 
 const { entry } = Astro.props;
+const urlSegment = entry.collection === "posts" ? "blog" : entry.collection;
 ---
 
 <a
-  href={`/${getLangFromSlug(entry.slug)}/${entry.collection}/${getPureSlug(entry.slug)}/`}
+  href={`/${getLangFromSlug(entry.id)}/${urlSegment}/${getPureSlug(entry.id)}/`}
   class="group relative flex flex-nowrap border border-black px-4 py-3 pr-10 hover:bg-black hover:text-white dark:border-white dark:hover:bg-white dark:hover:text-black"
 >
   <div class="flex flex-1 flex-col truncate">

@@ -35,3 +35,39 @@ Replace npm with your package manager of choice. `npm`, `pnpm`, `yarn`, `bun`, e
 # Aider Chat to Help
 
 `uv pip install --upgrade aider-chat`
+
+## Local Development
+
+The `content/` directory is a build-time artifact cloned from [blog-content](https://github.com/tpougy/blog-content). It is listed in `.gitignore` and is never committed to this repository. You must populate it before running the dev server.
+
+### Option 1: Run build.sh (recommended)
+
+```bash
+bash build.sh
+```
+
+This clones `blog-content` into `content/` and runs the full build (`astro sync`, `astro build`, `pagefind`). After it completes, the dev server works:
+
+```bash
+bun run dev
+```
+
+Note: requires internet access and rebuilds from scratch each time.
+
+### Option 2: Symlink (faster for local editing)
+
+If you have a local clone of `blog-content` in the parent directory:
+
+```bash
+rm -rf content && ln -sf ../blog-content content
+```
+
+Changes to `blog-content/` are reflected immediately without recloning.
+
+### Key Commands
+
+| Command           | Action                                             |
+| :---------------- | :------------------------------------------------- |
+| `bash build.sh`   | Clone blog-content and run full build              |
+| `bun run dev`     | Fast dev server (no Pagefind search index)         |
+| `bun run dev:search` | Full build + Pagefind + dev server (for search testing) |

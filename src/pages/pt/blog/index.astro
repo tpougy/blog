@@ -11,9 +11,9 @@ const url = Astro.url;
 const lang = getLangFromUrl(url); // Detecta o idioma da URL
 
 // Filtra os posts da coleção de acordo com o idioma
-const posts = (await getCollection("blog"))
-  .filter((post) => !post.data.draft && getLangFromSlug(post.slug) === lang)
-  .reduce((acc: { [year: string]: CollectionEntry<"blog">[] }, post) => {
+const posts = (await getCollection("posts"))
+  .filter((post) => !post.data.draft && getLangFromSlug(post.id) === lang)
+  .reduce((acc: { [year: string]: CollectionEntry<"posts">[] }, post) => {
     const year = post.data.date.getFullYear().toString();
     if (!acc[year]) {
       acc[year] = [];
