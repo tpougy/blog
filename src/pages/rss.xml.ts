@@ -7,7 +7,7 @@ type Context = {
 };
 
 export async function GET(context: Context) {
-  const blog = (await getCollection("blog")).filter((post) => !post.data.draft);
+  const blog = (await getCollection("posts")).filter((post) => !post.data.draft);
 
   const projects = (await getCollection("projects")).filter(
     (project) => !project.data.draft,
@@ -21,11 +21,15 @@ export async function GET(context: Context) {
     title: HOME.TITLE,
     description: HOME.DESCRIPTION,
     site: context.site,
-    items: items.map((item) => ({
-      title: item.data.title,
-      description: item.data.description,
-      pubDate: item.data.date,
-      link: `/${item.collection}/${item.slug}/`,
-    })),
+    items: items.map((item) => {
+      const urlSegment = item.collection === "posts" ? "blog" : item.collection;
+      const slug = item.id.split("/")[1];
+      return {
+        title: item.data.title,
+        description: item.data.description,
+        pubDate: item.data.date,
+        link: `/${urlSegment}/${slug}/`,
+      };
+    }),
   });
 }

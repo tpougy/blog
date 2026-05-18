@@ -1,6 +1,7 @@
 # build output
 dist/
 public/pagefind/
+content/
 
 # generated types
 .astro/

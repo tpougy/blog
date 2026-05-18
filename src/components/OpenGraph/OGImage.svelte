@@ -1,16 +1,15 @@
-<script lang="ts">
-  import { languages } from "@i18n/ui";
+<script>
   import { defaultLang } from "@i18n/ui";
   import { format_locale_date } from "@i18n/utils";
 
-  export let title: string = "";
-  export let date: Date = new Date();
-  export let author: string = "";
-  export let lang: keyof typeof languages = defaultLang;
+  let {
+    title = "",
+    date = new Date(),
+    author = "",
+    lang = defaultLang,
+  } = $props();
 
-  $: formattedDate = format_locale_date(date, lang);
-
-  // Remove hardcoded author constant
+  let formattedDate = $derived(format_locale_date(date, lang));
 </script>
 
 <!-- Container Principal - Apenas Estilos Inline -->

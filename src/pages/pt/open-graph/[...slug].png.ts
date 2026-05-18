@@ -14,13 +14,13 @@ interface OgProps {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   // Busca todos os posts da coleção 'blog' que começam com 'pt/'
-  const posts = await getCollection("blog", ({ id }) => id.startsWith("pt/"));
+  const posts = await getCollection("posts", ({ id }) => id.startsWith("pt/"));
 
   // Mapeia os posts para o formato esperado por getStaticPaths
   return posts.map((post) => {
     // Remove o prefixo 'pt/' do slug para formar o parâmetro da URL
     // Ex: 'pt/meu-primeiro-post' vira 'meu-primeiro-post'
-    const slug = post.slug.replace(/^pt\//, "");
+    const slug = post.id.split("/")[1];
 
     return {
       params: { slug: slug }, // O slug que aparecerá na URL: /pt/open-graph/[slug].png
