@@ -84,3 +84,8 @@ html #back-to-top {
 html.scrolled #back-to-top {
   @apply pointer-events-auto opacity-100;
 }
+
+/* Theme-aware image pairs (FEAT-01) */
+.theme-img-dark { display: none; }
+[data-theme='dark'] .theme-img-light { display: none; }
+[data-theme='dark'] .theme-img-dark { display: block; }
