@@ -13,17 +13,23 @@ const readFont = (filename: string) => {
   return readFile(fontPath);
 };
 
+// Hoisted: resolved once per build process, shared across all generateOgImage() calls
+const fontPoppinsRegularP = readFont("Poppins-Regular.ttf");
+const fontPoppinsBoldP = readFont("Poppins-Bold.ttf");
+const fontDmSerifDisplayRegularP = readFont("DMSerifDisplay-Regular.ttf");
+
 export const generateOgImage = async (
   title: string = "",
   date: Date = new Date(),
   lang: keyof typeof languages = defaultLang,
   author: string = SITE.NAME,
 ): Promise<Buffer> => {
-  const fontPoppinsRegular = await readFont("Poppins-Regular.ttf");
-  const fontPoppinsBold = await readFont("Poppins-Bold.ttf");
-  const fontDmSerifDisplayRegular = await readFont(
-    "DMSerifDisplay-Regular.ttf",
-  );
+  const [fontPoppinsRegular, fontPoppinsBold, fontDmSerifDisplayRegular] =
+    await Promise.all([
+      fontPoppinsRegularP,
+      fontPoppinsBoldP,
+      fontDmSerifDisplayRegularP,
+    ]);
 
   const options: SatoriOptions = {
     width: 1200,
