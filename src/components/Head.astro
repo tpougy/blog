@@ -1,5 +1,4 @@
 ---
-import { BeamAnalytics } from "astro-beam";
 import { ViewTransitions } from "astro:transitions";
 import "../styles/global.css";
 import HeadFavicon from "./HeadFavicon.astro";
@@ -61,7 +60,7 @@ const isGeneratedOgImage =
 <meta property="twitter:description" content={description} />
 {ogImageUrl && <meta property="twitter:image" content={ogImageUrl} />}
 
-<BeamAnalytics token="9b150291-64c8-446c-a1a1-c386d7edbcad" />
+<script async defer src="https://beampipe.io/js/tracker.js" data-beampipe-domain="blog.tpou.gy"></script>
 
 <ViewTransitions />
 
